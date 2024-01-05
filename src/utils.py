@@ -1,4 +1,5 @@
 import seaborn as sns
+from datetime import datetime
 
 def set_seaborn_style(font_family, background_color, grid_color, text_color):
     sns.set_style({
@@ -26,3 +27,16 @@ def set_seaborn_style(font_family, background_color, grid_color, text_color):
         "axes.spines.right": False,
         "axes.spines.top": False,
     })
+
+
+def days_between_dates(date_str1, date_str2):
+    # Convert date strings to datetime objects
+    date_format = "%A, %b %d, %Y %H:%M"
+    datetime1 = datetime.strptime(date_str1, date_format)
+    datetime2 = datetime.strptime(date_str2, date_format)
+
+    # Calculate the number of days between
+    time_difference = datetime2 - datetime1
+    days_between = abs(time_difference.days)
+
+    return days_between
