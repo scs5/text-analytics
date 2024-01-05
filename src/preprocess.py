@@ -4,8 +4,8 @@ import emoji
 
 RAW_DATA_FN = './data/texts.csv'
 CLEANED_DATA_FN = './data/cleaned_texts.csv'
-PHONE_NUMBER_DICT = {'+18646438969': 'Sam', 
-                     '+19418944844': 'Taylor'}
+PHONE_NUMBER_DICT = {'+19999999999': 'Sam', 
+                     '+18888888888': 'Taylor'}
 
 
 def clean_sender(row):
