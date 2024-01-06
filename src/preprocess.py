@@ -1,7 +1,7 @@
 import pandas as pd
 import re
 import emoji
-from utils import is_reaction
+from utils import is_reaction, get_sentiment_score
 
 RAW_DATA_FN = './data/texts.csv'
 CLEANED_DATA_FN = './data/cleaned_texts.csv'
@@ -48,6 +48,9 @@ def preprocess(df):
     # iMessage reactions
     df['is_reaction'] = [is_reaction(str(msg)) for msg in df['Text']]
 
+    # Sentiment scores
+    df['sentiment'] = [get_sentiment_score(str(msg)) for msg in df['Text']]
+ 
     # Save cleaned data
     df.to_csv(CLEANED_DATA_FN, index=False)
 

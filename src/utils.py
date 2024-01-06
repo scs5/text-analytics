@@ -103,3 +103,8 @@ def get_reaction_type(reaction_text):
         return words[0]
     else:
         return None
+    
+
+def get_sentiment_score(text):
+    afn = Afinn()
+    return afn.score(text)
