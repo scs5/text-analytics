@@ -1,6 +1,7 @@
 import pandas as pd
 import re
 import emoji
+from utils import is_reaction
 
 RAW_DATA_FN = './data/texts.csv'
 CLEANED_DATA_FN = './data/cleaned_texts.csv'
@@ -43,6 +44,9 @@ def preprocess(df):
     special_emojis = [':)', ':/', ':(', '◡̈']
     emojis = special_emojis + [em['en'] for em in emoji.EMOJI_DATA.values()]
     df['emoji_num'] = df['Text'].apply(lambda x: count_emojis(x, emojis=emojis))
+
+    # iMessage reactions
+    df['is_reaction'] = [is_reaction(str(msg)) for msg in df['Text']]
 
     # Save cleaned data
     df.to_csv(CLEANED_DATA_FN, index=False)

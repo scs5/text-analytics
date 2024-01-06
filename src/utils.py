@@ -1,5 +1,6 @@
 import seaborn as sns
 from datetime import datetime
+import re
 
 def set_seaborn_style(font_family, background_color, grid_color, text_color):
     sns.set_style({
@@ -40,3 +41,18 @@ def days_between_dates(date_str1, date_str2):
     days_between = abs(time_difference.days)
 
     return days_between
+def is_reaction(text):
+    reactions = ['Laughed at', 'Loved', 'Emphasized', 'Questioned', 'Disliked']
+    
+    patterns = []
+    for reacted_to in reactions:
+        patterns.append( re.compile(fr'{reacted_to} an image') )
+        patterns.append( re.compile(fr'{reacted_to} a movie') )
+        patterns.append( re.compile(fr'{reacted_to} “.*”') )
+
+    for pattern in patterns:
+        if pattern.match(text):
+            return True
+
+    return False
+
