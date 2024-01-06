@@ -1,6 +1,15 @@
 import seaborn as sns
 from datetime import datetime
+from nltk.tokenize import word_tokenize
+from nltk import pos_tag
+from PIL import Image
+from wordcloud import WordCloud, ImageColorGenerator
+import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib.colors import LinearSegmentedColormap
+from afinn import Afinn
 import re
+
 
 def set_seaborn_style(font_family, background_color, grid_color, text_color):
     sns.set_style({
@@ -41,6 +50,37 @@ def days_between_dates(date_str1, date_str2):
     days_between = abs(time_difference.days)
 
     return days_between
+
+
+def get_positive_adjectives(text):
+    afn = Afinn()
+    words = word_tokenize(text)
+    pos_tags = pos_tag(words)
+    adjectives = [word for word, pos in pos_tags if pos.startswith('JJ')]
+    positive_adjectives = [adj for adj in adjectives if afn.score(adj) > 0]
+    return positive_adjectives
+
+
+def create_custom_colormap(colors):
+    custom_cmap = LinearSegmentedColormap.from_list("custom_colormap", colors, N=256)
+    return custom_cmap
+
+
+def generate_wordcloud(text, mask_image_path, colors):
+    # Create word cloud with image mask
+    mask_image = np.array(Image.open(mask_image_path))
+    cloud_colors = ImageColorGenerator(mask_image)
+    wordcloud = WordCloud(width=800, height=400, mask=mask_image)
+    wordcloud.generate(text)
+
+    # Plot the word cloud
+    plt.figure(figsize=(30, 30))
+    cmap = create_custom_colormap(colors)
+    plt.imshow(wordcloud.recolor(colormap=cmap), interpolation='bilinear')
+    plt.axis("off")
+    plt.show()
+
+
 def is_reaction(text):
     reactions = ['Laughed at', 'Loved', 'Emphasized', 'Questioned', 'Disliked']
     
@@ -56,3 +96,10 @@ def is_reaction(text):
 
     return False
 
+
+def get_reaction_type(reaction_text):
+    words = reaction_text.split()
+    if words:
+        return words[0]
+    else:
+        return None
