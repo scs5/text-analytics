@@ -23,11 +23,11 @@ This repository contains code for generating visualizations of Apple text data. 
   <img src="./figures/num_double_texts.png" height="300" /> 
 </p>
 <p align="center">
-  <img src="./figures/num_first_word_of_day.png" height="300" />
-  <img src="./figures/num_last_word_of_day.png" height="300" /> 
+  <img src="./figures/sentiment_distribution.png" height="300" /> 
 </p>
 <p align="center">
-  <img src="./figures/sentiment_distribution.png" height="300" /> 
+  <img src="./figures/num_first_word_of_day.png" height="300" />
+  <img src="./figures/num_last_word_of_day.png" height="300" /> 
 </p>
 <p align="center">
   <img src="./figures/num_POVs.png" height="300" />
