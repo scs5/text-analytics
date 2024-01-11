@@ -1,3 +1,6 @@
+# Text Analytics
+This repository contains code for generating visualizations of Apple text data. See [this repository](https://github.com/AndrewMatayka/iMessage-Visualizer) for how to export your text data. Below is an example of visualizations for my own text data.
+
 ## Overview
 <p align="center">
   <img src="./figures/num_texts_total.png" height="325" />
